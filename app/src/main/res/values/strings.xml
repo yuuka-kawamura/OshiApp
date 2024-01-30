@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NauApp</string>
+    <string name="addTitle" />
+    <string name="yes" />
+    <string name="no" />
+    <string name="removeTitle" />
+    <string name="addButton" />
+</resources>
