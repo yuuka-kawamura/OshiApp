@@ -17,12 +17,16 @@ class HomeActivity : AppCompatActivity() {
         selectedImage = binding.pickImageButton  // ここでviewbuttonをImageViewに変更
         val toMotimonointent:Intent=Intent(this,MainActivity::class.java)
         val toKaimonointent:Intent=Intent(this,MainActivity2::class.java)
+        val toCalenderintent:Intent= Intent(this,CalenderActivity::class.java)
 
         binding.button.setOnClickListener {
             startActivity(toMotimonointent)
         }
         binding.button2.setOnClickListener {
             startActivity(toKaimonointent)
+        }
+        binding.button3.setOnClickListener {
+            startActivity(toCalenderintent)
         }
 
         // 画像選択のためのActivityResultLauncherを作成

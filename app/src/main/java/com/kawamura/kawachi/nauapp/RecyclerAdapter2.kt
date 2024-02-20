@@ -11,27 +11,28 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 ///５）リストを用意 クラス名(private val 変数名:ArrayList<データクラス>) //or MutableList
-class RecyclerAdapter2(private val todoList:ArrayList<TodoData2>) :RecyclerView.Adapter<RecyclerAdapter2.ViewHolderItem>() {
+class RecyclerAdapter2(private val todoList: ArrayList<TodoData2>) :
+    RecyclerView.Adapter<RecyclerAdapter2.ViewHolderItem>() {
     //listOf
 
     //１６）,rAdapter : RecyclerAdapter// RecyclerAdapterを受け取る
-    inner class ViewHolderItem(v:View,rAdapter:RecyclerAdapter2) :RecyclerView.ViewHolder(v) {
-        val tvHolder : TextView = v.findViewById(R.id.tv)
-        val tv2Holder :TextView= v.findViewById(R.id.tv2)
-        val tv3Holder:TextView=v.findViewById(R.id.tv3)
-        //追加
-        val cbHolder:CheckBox = v.findViewById(R.id.checkBox)
+    inner class ViewHolderItem(v: View, rAdapter: RecyclerAdapter2) : RecyclerView.ViewHolder(v) {
+        val tvHolder: TextView = v.findViewById(R.id.tv)
+        val tv2Holder: TextView = v.findViewById(R.id.tv2)
+        val tv3Holder: TextView = v.findViewById(R.id.tv3)
 
+        //追加
+        val cbHolder: CheckBox = v.findViewById(R.id.checkBox)
 
 
         init {
             // Click listener for the entire row
             v.setOnClickListener {
                 // Your existing code for showing the AlertDialog
-                val position:Int = adapterPosition
+                val position: Int = adapterPosition
                 val listPosition = todoList[position]
                 tv2Holder.text = listPosition.myCount.toString()
-                tv3Holder.text=listPosition.myPrice.toString()
+                tv3Holder.text = listPosition.myPrice.toString()
 
                 //１４）アラートダイアログ
                 AlertDialog.Builder(v.context)
@@ -42,8 +43,10 @@ class RecyclerAdapter2(private val todoList:ArrayList<TodoData2>) :RecyclerView.
                         todoList.removeAt(position)
                         //１６）表示を更新
                         rAdapter.notifyItemRemoved(position)
+
+
                     })
-                    .setNegativeButton("No",null)
+                    .setNegativeButton("No", null)
                     .show()
 
 
@@ -73,11 +76,12 @@ class RecyclerAdapter2(private val todoList:ArrayList<TodoData2>) :RecyclerView.
             }
         }
     }
+
     //６）一行だけのViewを生成
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderItem {
         val itemXml = LayoutInflater.from(parent.context)
-            .inflate(R.layout.two_layout,parent,false)
-        return ViewHolderItem(itemXml,this) //１６）RecyclerAdapterを受け渡す
+            .inflate(R.layout.two_layout, parent, false)
+        return ViewHolderItem(itemXml, this) //１６）RecyclerAdapterを受け渡す
     }
 
     //７）position番目のデータをレイアウト(xml)に表示するようセット
@@ -85,10 +89,9 @@ class RecyclerAdapter2(private val todoList:ArrayList<TodoData2>) :RecyclerView.
 
         val currentItem = todoList[position]
         holder.tvHolder.text = currentItem.myTodo
-        holder.tv2Holder.text=currentItem.myCount.toString()
-        holder.tv3Holder.text=currentItem.myPrice.toString()
+        holder.tv2Holder.text = currentItem.myCount.toString()
+        holder.tv3Holder.text = currentItem.myPrice.toString()
         holder.cbHolder.isChecked = currentItem.isChecked
-
 
 
         // Set the initial state of the text based on the checkbox
@@ -96,7 +99,8 @@ class RecyclerAdapter2(private val todoList:ArrayList<TodoData2>) :RecyclerView.
             holder.tvHolder.paintFlags = holder.tvHolder.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
         } else {
-            holder.tvHolder.paintFlags = holder.tvHolder.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            holder.tvHolder.paintFlags =
+                holder.tvHolder.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
 
         }
 
@@ -106,6 +110,7 @@ class RecyclerAdapter2(private val todoList:ArrayList<TodoData2>) :RecyclerView.
     override fun getItemCount(): Int {
         return todoList.size
     }
+
 
 
 }
