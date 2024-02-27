@@ -8,12 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity2 : AppCompatActivity() {
+class MainActivity2 : AppCompatActivity(),TotalAmountListener {
 
     //９）追加リストと、RecyclerViewと、アダプターを用意
     private var addList2 =ArrayList<TodoData2>() //空っぽのリストを用意<型はデータクラス>
     private lateinit var recyclerView : RecyclerView
-    private var recyclerAdapter = RecyclerAdapter2(addList2) //アダプターに追加リストをセット
+    private var recyclerAdapter = RecyclerAdapter2(addList2, this)//アダプターに追加リストをセット
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,4 +78,11 @@ class MainActivity2 : AppCompatActivity() {
 
         return totalAmount
     }
+
+    override fun onTotalAmountChanged(totalAmount: Int) {
+        // 合計金額が変更されたときの処理をここに追加
+        val totalAmountText: TextView = findViewById(R.id.totalamount_text)
+        totalAmountText.text = "合計金額: ¥$totalAmount"
+    }
+
 }
